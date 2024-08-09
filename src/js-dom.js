@@ -97,8 +97,7 @@ const calcFactorial = (num) => {
         return 1
     }
     for (let i = num - 1; i > 0; i--) {
-        collect *= [i]
-    }
+        collect *= i    }
     return collect
 }
 

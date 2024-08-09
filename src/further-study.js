@@ -53,7 +53,7 @@ function buildWordChain(words) {
                 ) 
             }
         if (loopCheck) {
-            break
+            return finalArr
         }
         }
     }
