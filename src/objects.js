@@ -90,7 +90,7 @@ const EN_PIRATE_LOOKUP = {
 };
 
 function translateToPirateTalk(phrase) {
-  finalStrArray = []
+  let finalStrArray = []
   for (const str of phrase.split(' ')) {
     if (EN_PIRATE_LOOKUP[str] !== undefined) {
       finalStrArray.push(EN_PIRATE_LOOKUP[str])
@@ -108,7 +108,17 @@ function translateToPirateTalk(phrase) {
 // Ex.:
 //   wordCount('hello world')
 //   => { hello: 1, world: 1 }
-function wordCount(str) {}
+function wordCount(str) {
+  let wordObj = {}
+  for (const word of str.split(' ')) {
+    if (wordObj[word] === undefined) {
+      wordObj[word] = 1
+    } else {
+      wordObj[word] ++
+    }
+  }
+  return wordObj
+}
 
 // Given an object representing a bug, return true if the given bug is
 // available in the given month.
@@ -130,7 +140,16 @@ function wordCount(str) {}
 //     }
 //   }, 1);
 //   => true
-function isBugAvailable(bug, month) {}
+function isBugAvailable(bug, month) {
+  let bugCheck = false
+  // this for... of loop goes through the array within the months key of the availability object, which itself is a key of the bug object
+  for (const monthNum of bug.availability.months) {
+    if (monthNum === month) {
+      bugCheck = true
+    }
+  }
+  return bugCheck
+}
 
 // Given an array of objects representing bugs, return an object that'll be
 // used to build a calendar. The keys of the object should be the months of the
@@ -173,7 +192,18 @@ function isBugAvailable(bug, month) {}
 //     12: [],
 //   }
 
-function buildBugHuntCalendar(bugs) {}
+function buildBugHuntCalendar(bugs) {
+  let monthBugObj = {};
+  for (let i = 1; i < 13; i++) {
+    monthBugObj[i] = [];
+  }
+  for (const numBug of bugs) {
+    for (const monthNum of numBug.availability.months) {
+      monthBugObj[monthNum].push(numBug.name);
+    }
+  }
+  return monthBugObj;
+}
 
 export {
   buildBugHuntCalendar,
